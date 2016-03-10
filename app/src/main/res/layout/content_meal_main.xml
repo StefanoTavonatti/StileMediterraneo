@@ -30,7 +30,7 @@
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/view1"
-            android:src="@drawable/ic_menu_camera"
+            android:src="@drawable/cup"
             />
 
         <Button

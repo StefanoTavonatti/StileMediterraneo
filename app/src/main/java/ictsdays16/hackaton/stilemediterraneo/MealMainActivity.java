@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 
+import ictsdays16.hackaton.stilemediterraneo.datamanager.DBManager;
 import ictsdays16.hackaton.stilemediterraneo.listeners.FoodOnTouchListener;
 
 public class MealMainActivity extends AppCompatActivity
@@ -103,6 +104,11 @@ public class MealMainActivity extends AppCompatActivity
         });
 
         findViewById(R.id.MealMainLayout).setOnDragListener(this);
+
+        DBManager dbManager=new DBManager(this);
+        dbManager.insertData();
+
+        Log.d("DB",""+dbManager.readData().getCount());
     }
 
     @Override
