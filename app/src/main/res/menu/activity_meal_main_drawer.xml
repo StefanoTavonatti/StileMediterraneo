@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <!--
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_camera"
@@ -19,6 +20,20 @@
             android:icon="@drawable/ic_menu_manage"
             android:title="Tools" />
     </group>
+    -->
+
+    <item android:title="@string/info_title">
+        <menu>
+            <item
+                android:id="@+id/info_inside"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/info_inside" />
+            <item
+                android:id="@+id/info_link"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/info_link" />
+        </menu>
+    </item>
 
     <item android:title="@string/stats_title">
         <menu>
@@ -36,6 +51,19 @@
                 android:icon="@drawable/ic_menu_send"
                 android:title="@string/total"
                 />
+        </menu>
+    </item>
+
+    <item android:title="@string/credits_name">
+        <menu>
+            <item
+                android:id="@+id/icons_credits"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/icons_credits" />
+            <item
+                android:id="@+id/developers_credits"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/developers_credits" />
         </menu>
     </item>
 
