@@ -20,16 +20,22 @@
             android:title="Tools" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="@string/stats_title">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/last_week"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="@string/last_week" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/last_month"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="@string/last_month" />
+
+            <item
+                android:id="@+id/nav_total"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/total"
+                />
         </menu>
     </item>
 

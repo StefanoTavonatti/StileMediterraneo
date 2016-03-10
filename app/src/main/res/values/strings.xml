@@ -5,4 +5,12 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <!--  Navigation drawer stringd-->
+
+    <string name="stats_title">Statistiche</string>
+    <string name="last_week">Scorsa settimana</string>
+    <string name="last_month">Scorsa settimana</string>
+    <string name="total">Totali</string>
+
 </resources>
