@@ -26,4 +26,8 @@
     <string name="return_button">OK</string>
     <string name="title_activity_internal_info">InternalInfoActivity</string>
 
+    <!-- dev strings -->
+    <string name="dev_presentation">Ciao! Siamo un gruppo di sviluppatori che si sono divertiti a fare questa applicazione per un Hackthon organizzato durante gli ITCdays2016 a Povo(TN). Puoi contattarci tramite mail:</string>
+    <string name="dev_github">Puoi trovare il codice di questa applicazione su GitHub:</string>
+
 </resources>

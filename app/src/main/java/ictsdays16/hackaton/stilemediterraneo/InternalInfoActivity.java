@@ -25,5 +25,8 @@ public class InternalInfoActivity extends AppCompatActivity {
             }
         });
     }
+    public void returnHome(View v) {
+        finish();
+    }
 
 }
