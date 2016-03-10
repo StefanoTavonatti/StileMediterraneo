@@ -108,7 +108,7 @@ public class MealMainActivity extends AppCompatActivity
         DBManager dbManager=new DBManager(this);
         dbManager.insertData();
 
-        Log.d("DB",""+dbManager.readData().getCount());
+        Log.d("DB", "" + dbManager.readData().getCount());
     }
 
     @Override
@@ -163,7 +163,15 @@ public class MealMainActivity extends AppCompatActivity
             startActivity(newIntent);
         }
         else if (id == R.id.info_link) {
-            Intent newIntent = new Intent(this,LinkInfoActivity.class);
+            Intent newIntent = new Intent(this,ExternalLinkActivity.class);
+            startActivity(newIntent);
+        }
+        else if (id == R.id.last_week) {
+            Intent newIntent = new Intent(this,WeekStatsActivity.class);
+            startActivity(newIntent);
+        }
+        else if (id == R.id.last_month) {
+            Intent newIntent = new Intent(this,MonthStatsActivity.class);
             startActivity(newIntent);
         }
 

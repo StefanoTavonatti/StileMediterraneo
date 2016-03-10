@@ -20,11 +20,10 @@
         </activity>
         <activity android:name=".IconCreditsActivity" />
         <activity android:name=".DevCreditsActivity" />
-        <activity
-            android:name=".InternalInfoActivity"
-            android:label="@string/title_activity_internal_info"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LinkInfoActivity"></activity>
+        <activity android:name=".InternalInfoActivity" />
+        <activity android:name=".ExternalLinkActivity" />
+        <activity android:name=".WeekStatsActivity" />
+        <activity android:name=".MonthStatsActivity"></activity>
     </application>
 
 </manifest>

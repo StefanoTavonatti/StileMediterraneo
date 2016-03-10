@@ -9,14 +9,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context="ictsdays16.hackaton.stilemediterraneo.InternalInfoActivity">
+    tools:context="ictsdays16.hackaton.stilemediterraneo.MonthStatsActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:gravity="center"
-        android:text="TODO!!!!!!!!!!!!" />
+        android:text="TODO" />
 
     <Button
         android:text="@string/return_button"
@@ -34,3 +33,4 @@
         android:onClick="returnHome"/>
 
 </LinearLayout>
+
