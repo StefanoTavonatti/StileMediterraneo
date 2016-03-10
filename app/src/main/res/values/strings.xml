@@ -21,4 +21,9 @@
     <string name="developers_credits">Sviluppatori</string>
     <string name="icons_credits">Icone</string>
 
+    <!-- credits strings -->
+    <string name="icon_credits_text">Tutte le icone di questa applicazione (escluse quelle fornite da Android) sono state fornite da:</string>
+    <string name="return_button">OK</string>
+    <string name="title_activity_internal_info">InternalInfoActivity</string>
+
 </resources>

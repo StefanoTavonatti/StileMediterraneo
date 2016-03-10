@@ -1,6 +1,7 @@
 package ictsdays16.hackaton.stilemediterraneo;
 
 import android.content.ClipData;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -83,7 +84,7 @@ public class MealMainActivity extends AppCompatActivity
                         break;
                     case DragEvent.ACTION_DROP:
                         // Dropped, reassign View to ViewGroup
-                        Log.d("DRAG","Dropped here "+v.getId()+" "+v.getParent().getClass().toString());
+                        Log.d("DRAG", "Dropped here " + v.getId() + " " + v.getParent().getClass().toString());
                         View view = (View) event.getLocalState();
                         ViewGroup owner = (ViewGroup) view.getParent();
                         owner.removeView(view);
@@ -136,20 +137,26 @@ public class MealMainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        /*
+
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-
-        }*/
+        if (id == R.id.icons_credits) {
+            Intent newIntent = new Intent(this,IconCreditsActivity.class);
+            startActivity(newIntent);
+        }
+        else if (id == R.id.developers_credits) {
+            Intent newIntent = new Intent(this,DevCreditsActivity.class);
+            startActivity(newIntent);
+        }
+        else if (id == R.id.info_inside) {
+            Intent newIntent = new Intent(this,InternalInfoActivity.class);
+            startActivity(newIntent);
+        }
+        else if (id == R.id.info_link) {
+            Intent newIntent = new Intent(this,LinkInfoActivity.class);
+            startActivity(newIntent);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -18,6 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".IconCreditsActivity" />
+        <activity android:name=".DevCreditsActivity" />
+        <activity
+            android:name=".InternalInfoActivity"
+            android:label="@string/title_activity_internal_info"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".LinkInfoActivity"></activity>
     </application>
 
 </manifest>
