@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:textSize="20dp"
         android:gravity="center"
-        android:text="TODO!!!!!!!!!!!!" />
+        android:text="@string/dev_diet_info" />
 
     <Button
         android:text="@string/return_button"
