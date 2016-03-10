@@ -8,9 +8,17 @@
 
     <!--  Navigation drawer stringd-->
 
+    <string name="info_title">Informazioni</string>
+    <string name="info_inside">Descrizione</string>
+    <string name="info_link">Fondazione Dieta</string>
+
     <string name="stats_title">Statistiche</string>
     <string name="last_week">Scorsa settimana</string>
     <string name="last_month">Scorsa settimana</string>
     <string name="total">Totali</string>
+
+    <string name="credits_name">Crediti</string>
+    <string name="developers_credits">Sviluppatori</string>
+    <string name="icons_credits">Icone</string>
 
 </resources>
