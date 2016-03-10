@@ -2,11 +2,7 @@ package ictsdays16.hackaton.stilemediterraneo;
 
 import android.content.ClipData;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -25,7 +21,6 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import ictsdays16.hackaton.stilemediterraneo.datamanager.DBManager;
@@ -34,8 +29,8 @@ import ictsdays16.hackaton.stilemediterraneo.listeners.FoodOnTouchListener;
 public class MealMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnDragListener {
 
+    private Button dragBtn;
     private LinearLayout menuReceiver;
-    private GridLayout gridLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +57,7 @@ public class MealMainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        gridLayout= (GridLayout) findViewById(R.id.MealGridLayout);
+        //dragBtn= (Button) findViewById(R.id.drag_btn);
 
         //findViewById(R.id.drag_btn).setOnTouchListener(new FoodOnTouchListener());
 
@@ -113,7 +108,7 @@ public class MealMainActivity extends AppCompatActivity
         DBManager dbManager=new DBManager(this);
         dbManager.insertData();
 
-        loadIcons(savedInstanceState);
+        Log.d("DB",""+dbManager.readData().getCount());
     }
 
     @Override
@@ -168,7 +163,7 @@ public class MealMainActivity extends AppCompatActivity
             startActivity(newIntent);
         }
         else if (id == R.id.info_link) {
-            Intent newIntent = new Intent(this,LinkInfoActivity.class);
+            Intent newIntent = new Intent(this,ExternalLinkActivity.class);
             startActivity(newIntent);
         }
 
@@ -206,27 +201,5 @@ public class MealMainActivity extends AppCompatActivity
                 break;
         }
         return true;
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle bundle){
-        super.onSaveInstanceState(bundle);
-    }
-
-    public void loadIcons(Bundle saveInstaceState){
-
-        DBManager dbManager=new DBManager(this);
-        Cursor cursor=dbManager.readData();
-
-        cursor.moveToFirst();
-        for(int i=0;i<cursor.getCount();i++){
-            //Uri uri= Uri.parse(cursor.getString(1));
-            Log.d("URI", ""+cursor.getCount()+" "+cursor.getColumnCount()+cursor.getString(0));
-            /*ImageView imageView=new ImageView(getApplicationContext());
-            imageView.setImageBitmap(BitmapFactory.decodeFile(new File()));*/
-            //gridLayout.addView(imageView);
-
-        }
-        cursor.close();
     }
 }

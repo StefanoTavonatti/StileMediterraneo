@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context="ictsdays16.hackaton.stilemediterraneo.InternalInfoActivity">
+    tools:context="ictsdays16.hackaton.stilemediterraneo.ExternalLinkActivity">
 
     <TextView
         android:layout_width="wrap_content"
