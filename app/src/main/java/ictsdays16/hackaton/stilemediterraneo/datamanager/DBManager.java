@@ -4,6 +4,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
+
+import java.util.ArrayList;
+
+import ictsdays16.hackaton.stilemediterraneo.R;
 
 /**
  * Created by stefano on 10/03/16.
@@ -31,14 +36,19 @@ public class DBManager extends SQLiteOpenHelper {
         //db.execSQL("CREATE TABLE...");
 
         //db.execSQL("INSER INTO....");
+        db.close();
     }
 
     public void insertData(){
         SQLiteDatabase db=getWritableDatabase();
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pizza\",\"cup\")");
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"anatra\",\"cup\")");
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pasta\",\"cup\")");
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"sushi\",\"cup\")");
+        Uri path = Uri.parse("android.resource://ictsdays16.hackaton.stilemediterraneo/" + R.drawable.cup);
+
+        String uriCup=path.toString();
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pizza\",\""+uriCup+"\")");
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"anatra\",\""+uriCup+"\")");
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pasta\",\""+uriCup+"\")");
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"sushi\",\""+uriCup+"\")");
+        db.close();
     }
 
     public Cursor readData(){
