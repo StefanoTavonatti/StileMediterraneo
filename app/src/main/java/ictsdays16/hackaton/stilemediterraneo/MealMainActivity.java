@@ -20,12 +20,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 
 import ictsdays16.hackaton.stilemediterraneo.listeners.FoodOnTouchListener;
 
 public class MealMainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnDragListener {
 
     private Button dragBtn;
     private LinearLayout menuReceiver;
@@ -100,6 +101,8 @@ public class MealMainActivity extends AppCompatActivity
                 return true;
             }
         });
+
+        findViewById(R.id.MealMainLayout).setOnDragListener(this);
     }
 
     @Override
@@ -160,6 +163,37 @@ public class MealMainActivity extends AppCompatActivity
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public boolean onDrag(View v, DragEvent event) {
+        int action = event.getAction();
+        switch (event.getAction()) {
+            case DragEvent.ACTION_DRAG_STARTED:
+                // do nothing
+                break;
+            case DragEvent.ACTION_DRAG_ENTERED:
+                //v.setBackgroundDrawable(enterShape);
+                break;
+            case DragEvent.ACTION_DRAG_EXITED:
+                //v.setBackgroundDrawable(normalShape);
+                break;
+            case DragEvent.ACTION_DROP:
+                // Dropped, reassign View to ViewGroup
+                Log.d("DRAG", "Dropped here " + v.getId() + " " + v.getParent().getClass().toString());
+                View view = (View) event.getLocalState();
+                ViewGroup owner = (ViewGroup) view.getParent();
+                owner.removeView(view);
+                GridLayout container = (GridLayout) findViewById(R.id.MealGridLayout);
+                container.addView(view);
+                view.setVisibility(View.VISIBLE);
+                break;
+            case DragEvent.ACTION_DRAG_ENDED:
+                //v.setBackgroundDrawable(normalShape);
+            default:
+                break;
+        }
         return true;
     }
 }
