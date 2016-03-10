@@ -1,8 +1,13 @@
 package ictsdays16.hackaton.stilemediterraneo;
 
+import android.content.ClipData;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,9 +17,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.LinearLayout;
+
+import ictsdays16.hackaton.stilemediterraneo.listeners.FoodOnTouchListener;
 
 public class MealMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private Button dragBtn;
+    private LinearLayout menuReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +53,52 @@ public class MealMainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        dragBtn= (Button) findViewById(R.id.drag_btn);
+
+        findViewById(R.id.drag_btn).setOnTouchListener(new FoodOnTouchListener());
+
+        findViewById(R.id.drag_btn2).setOnTouchListener(new FoodOnTouchListener());
+
+        findViewById(R.id.view1).setOnTouchListener(new FoodOnTouchListener());
+
+        menuReceiver= (LinearLayout) findViewById(R.id.menu_receiver);
+
+        menuReceiver.setOnDragListener(new View.OnDragListener() {
+            //Drawable enterShape = getResources().getDrawable(R.drawable.shape_droptarget);
+            //Drawable normalShape = getResources().getDrawable(R.drawable.shape);
+
+            @Override
+            public boolean onDrag(View v, DragEvent event) {
+                int action = event.getAction();
+                switch (event.getAction()) {
+                    case DragEvent.ACTION_DRAG_STARTED:
+                        // do nothing
+                        break;
+                    case DragEvent.ACTION_DRAG_ENTERED:
+                        //v.setBackgroundDrawable(enterShape);
+                        break;
+                    case DragEvent.ACTION_DRAG_EXITED:
+                        //v.setBackgroundDrawable(normalShape);
+                        break;
+                    case DragEvent.ACTION_DROP:
+                        // Dropped, reassign View to ViewGroup
+                        Log.d("DRAG","Dropped here "+v.getId()+" "+v.getParent().getClass().toString());
+                        View view = (View) event.getLocalState();
+                        ViewGroup owner = (ViewGroup) view.getParent();
+                        owner.removeView(view);
+                        LinearLayout container = (LinearLayout) v;
+                        container.addView(view);
+                        view.setVisibility(View.VISIBLE);
+                        break;
+                    case DragEvent.ACTION_DRAG_ENDED:
+                        //v.setBackgroundDrawable(normalShape);
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
     }
 
     @Override
