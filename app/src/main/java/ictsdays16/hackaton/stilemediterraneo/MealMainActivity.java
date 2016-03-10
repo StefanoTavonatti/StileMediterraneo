@@ -7,12 +7,15 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.Layout;
 import android.util.Log;
+import android.view.Display;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -43,7 +46,7 @@ public class MealMainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnDragListener {
 
     private Button dragBtn;
-    private LinearLayout menuReceiver;
+    private GridLayout menuReceiver;
     private GridLayout gridLayout;
 
     @Override
@@ -81,7 +84,7 @@ public class MealMainActivity extends AppCompatActivity
 
         //findViewById(R.id.view1).setOnTouchListener(new FoodOnTouchListener());
 
-        menuReceiver= (LinearLayout) findViewById(R.id.menu_receiver);
+        menuReceiver= (GridLayout) findViewById(R.id.menu_receiver);
 
         menuReceiver.setOnDragListener(new View.OnDragListener() {
             //Drawable enterShape = getResources().getDrawable(R.drawable.shape_droptarget);
@@ -106,7 +109,7 @@ public class MealMainActivity extends AppCompatActivity
                         View view = (View) event.getLocalState();
                         ViewGroup owner = (ViewGroup) view.getParent();
                         owner.removeView(view);
-                        LinearLayout container = (LinearLayout) v;
+                        GridLayout container = (GridLayout) v;
                         container.addView(view);
                         view.setVisibility(View.VISIBLE);
                         break;
@@ -222,8 +225,15 @@ public class MealMainActivity extends AppCompatActivity
     public void  loadIcons(Bundle bundle){
         DBManager dbManager=new DBManager(this);
 
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+
         Cursor c=dbManager.readData();
         c.moveToFirst();
+        //LinearLayout riga=new LinearLayout(this);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        //riga.setLayoutParams(params);
         for(int i=0;i<c.getCount();i++){
 
             Uri uri = Uri.parse(c.getString(1));
@@ -235,7 +245,9 @@ public class MealMainActivity extends AppCompatActivity
             }
             Bitmap bitmap= BitmapFactory.decodeStream(is);
             ImageView imageView=new ImageView(this);
-            imageView.setImageBitmap(bitmap);
+            imageView.setImageBitmap(Bitmap.createScaledBitmap(bitmap, size.x / 7, size.x / 7, true));
+            //imageView.setImageBitmap(bitmap); //DECOMMENTA QUI NEL CASO IL CARICAMNTO DELLE IMMAGINI FOSSE TROPPO LENTO E COMMENTA LA RIGA SOPRA
+
 
             LinearLayout linearLayout=new LinearLayout(this);
             linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -243,13 +255,30 @@ public class MealMainActivity extends AppCompatActivity
             TextView textView=new TextView(this);
             textView.setText(c.getString(0));
             linearLayout.addView(textView);
+            textView.setGravity(TextView.TEXT_ALIGNMENT_CENTER);
+            textView.setGravity(TextView.TEXT_ALIGNMENT_CENTER);
             linearLayout.setOnTouchListener(new FoodOnTouchListener());
-            //LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-
+            linearLayout.setGravity(LinearLayout.TEXT_ALIGNMENT_CENTER);
+            linearLayout.setHorizontalGravity(LinearLayout.TEXT_ALIGNMENT_CENTER);
             //linearLayout.setLayoutParams(params);
-            ;
+            //
+            // LinearLayout.LayoutParams params= (LinearLayout.LayoutParams) linearLayout.getLayoutParams();
+//            params.width=(gridLayout.getWidth()/gridLayout.getColumnCount());
+
+
+            params.width=((int)(size.x/4.5));
+
+            linearLayout.setLayoutParams(params);
+
             gridLayout.addView(linearLayout);
             c.moveToNext();
+            /*if(i%4==0){
+                gridLayout.addView(riga);
+                riga=new LinearLayout(this);
+                riga.setLayoutParams(params);
+            }*/
         }
+
+
     }
 }

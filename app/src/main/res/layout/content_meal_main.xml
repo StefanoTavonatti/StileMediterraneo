@@ -12,39 +12,26 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="ictsdays16.hackaton.stilemediterraneo.MealMainActivity"
     tools:showIn="@layout/app_bar_meal_main"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_gravity="center">
 
-    <LinearLayout
+    <GridLayout
         android:id="@+id/menu_receiver"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:background="@color/colorAccent"
-        android:padding="12dp">
+        android:padding="12dp"
+        android:columnCount="4">
 
-    </LinearLayout>
+    </GridLayout>
 
     <GridLayout
         android:id="@+id/MealGridLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/view1"
-            android:src="@drawable/cup"
-            />
-
-        <!--<Button
-            android:id="@+id/drag_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Prova"
-            />
-        <Button
-            android:id="@+id/drag_btn2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Prova2"
-            />-->
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        >
 
     </GridLayout>
 
