@@ -2,7 +2,13 @@ package ictsdays16.hackaton.stilemediterraneo;
 
 import android.content.ClipData;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -21,7 +27,14 @@ import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.net.URI;
 
 import ictsdays16.hackaton.stilemediterraneo.datamanager.DBManager;
 import ictsdays16.hackaton.stilemediterraneo.listeners.FoodOnTouchListener;
@@ -31,6 +44,7 @@ public class MealMainActivity extends AppCompatActivity
 
     private Button dragBtn;
     private LinearLayout menuReceiver;
+    private GridLayout gridLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +71,15 @@ public class MealMainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        gridLayout= (GridLayout) findViewById(R.id.MealGridLayout);
+
         //dragBtn= (Button) findViewById(R.id.drag_btn);
 
         //findViewById(R.id.drag_btn).setOnTouchListener(new FoodOnTouchListener());
 
         //findViewById(R.id.drag_btn2).setOnTouchListener(new FoodOnTouchListener());
 
-        findViewById(R.id.view1).setOnTouchListener(new FoodOnTouchListener());
+        //findViewById(R.id.view1).setOnTouchListener(new FoodOnTouchListener());
 
         menuReceiver= (LinearLayout) findViewById(R.id.menu_receiver);
 
@@ -108,7 +124,7 @@ public class MealMainActivity extends AppCompatActivity
         DBManager dbManager=new DBManager(this);
         dbManager.insertData();
 
-        Log.d("DB",""+dbManager.readData().getCount());
+        loadIcons(savedInstanceState);
     }
 
     @Override
@@ -201,5 +217,39 @@ public class MealMainActivity extends AppCompatActivity
                 break;
         }
         return true;
+    }
+
+    public void  loadIcons(Bundle bundle){
+        DBManager dbManager=new DBManager(this);
+
+        Cursor c=dbManager.readData();
+        c.moveToFirst();
+        for(int i=0;i<c.getCount();i++){
+
+            Uri uri = Uri.parse(c.getString(1));
+            InputStream is=null;
+            try {
+                is=getContentResolver().openInputStream(uri);
+            } catch (FileNotFoundException e) {
+                continue;
+            }
+            Bitmap bitmap= BitmapFactory.decodeStream(is);
+            ImageView imageView=new ImageView(this);
+            imageView.setImageBitmap(bitmap);
+
+            LinearLayout linearLayout=new LinearLayout(this);
+            linearLayout.setOrientation(LinearLayout.VERTICAL);
+            linearLayout.addView(imageView);
+            TextView textView=new TextView(this);
+            textView.setText(c.getString(0));
+            linearLayout.addView(textView);
+            linearLayout.setOnTouchListener(new FoodOnTouchListener());
+            //LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+
+            //linearLayout.setLayoutParams(params);
+            ;
+            gridLayout.addView(linearLayout);
+            c.moveToNext();
+        }
     }
 }

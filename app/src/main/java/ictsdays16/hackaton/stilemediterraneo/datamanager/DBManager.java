@@ -36,18 +36,26 @@ public class DBManager extends SQLiteOpenHelper {
         //db.execSQL("CREATE TABLE...");
 
         //db.execSQL("INSER INTO....");
-        db.close();
+
     }
 
     public void insertData(){
         SQLiteDatabase db=getWritableDatabase();
-        Uri path = Uri.parse("android.resource://ictsdays16.hackaton.stilemediterraneo/" + R.drawable.cup);
+        Uri path = Uri.parse("android.resource://ictsdays16.hackaton.stilemediterraneo/drawable/" + "cup");
 
         String uriCup=path.toString();
         db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pizza\",\""+uriCup+"\")");
         db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"anatra\",\""+uriCup+"\")");
         db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pasta\",\""+uriCup+"\")");
         db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"sushi\",\""+uriCup+"\")");
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pizza1\",\""+uriCup+"\")");
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"anatra1\",\""+uriCup+"\")");
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pasta1\",\""+uriCup+"\")");
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"sushi1\",\""+uriCup+"\")");
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pizza2\",\""+uriCup+"\")");
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"anatra2\",\""+uriCup+"\")");
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pasta2\",\""+uriCup+"\")");
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"sushi2\",\""+uriCup+"\")");
         db.close();
     }
 
