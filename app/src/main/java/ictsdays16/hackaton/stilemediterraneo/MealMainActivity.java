@@ -39,6 +39,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import ictsdays16.hackaton.stilemediterraneo.datamanager.DBManager;
 import ictsdays16.hackaton.stilemediterraneo.layouts.FoodLinearLayout;
@@ -52,6 +54,8 @@ public class MealMainActivity extends AppCompatActivity
     private GridLayout gridLayout;
     private SharedPreferences prefs;
     private Boolean iconLoaded=false;
+    public static String DATA_KEY="DATA_KEY";
+    private Bundle savedInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +150,13 @@ public class MealMainActivity extends AppCompatActivity
         });
 
         findViewById(R.id.MealMainLayout).setOnDragListener(this);
+
+        if(savedInstanceState!=null){
+            savedInstance=savedInstanceState;
+        }
+        else {
+            savedInstance=null;
+        }
 
     }
 
@@ -251,9 +262,13 @@ public class MealMainActivity extends AppCompatActivity
 
         Cursor c=dbManager.readData();
         c.moveToFirst();
-        //LinearLayout riga=new LinearLayout(this);
+        ;
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        //riga.setLayoutParams(params);
+
+        ArrayList<Integer> arrayList=null;
+        if(savedInstance!=null){
+            arrayList=savedInstance.getIntegerArrayList(DATA_KEY);
+        }
         for(int i=0;i<c.getCount();i++){
 
             Uri uri = Uri.parse(c.getString(1));
@@ -294,7 +309,28 @@ public class MealMainActivity extends AppCompatActivity
 
             linearLayout.setLayoutParams(params);
 
-            gridLayout.addView(linearLayout);
+            if(arrayList==null) {
+                gridLayout.addView(linearLayout);
+            }else {
+                int id=c.getInt(2);
+                Iterator<Integer> iterator=arrayList.iterator();
+
+                boolean selezionato=false;
+
+                while (iterator.hasNext()){
+                    if(id==iterator.next().intValue()){
+                        selezionato=true;
+                        break;
+                    }
+                }
+
+                if(selezionato){
+                    menuReceiver.addView(linearLayout);
+                }
+                else {
+                    gridLayout.addView(linearLayout);
+                }
+            }
             c.moveToNext();
             /*if(i%4==0){
                 gridLayout.addView(riga);
@@ -302,6 +338,7 @@ public class MealMainActivity extends AppCompatActivity
                 riga.setLayoutParams(params);
             }*/
         }
+        savedInstance=null;
 
     }
 
@@ -326,5 +363,22 @@ public class MealMainActivity extends AppCompatActivity
 
     public void onClickTutorial(View view){
         view.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle bundle){
+        super.onSaveInstanceState(bundle);
+
+        ArrayList<Integer> arrayList=new ArrayList<Integer>();
+
+        for(int i=0;i<menuReceiver.getChildCount();i++){
+            View view=menuReceiver.getChildAt(i);
+
+            if(view instanceof FoodLinearLayout){
+                FoodLinearLayout foodLinearLayout= (FoodLinearLayout) view;
+                arrayList.add(new Integer(foodLinearLayout.getID()));
+            }
+        }
+        bundle.putIntegerArrayList(DATA_KEY,arrayList);
     }
 }
