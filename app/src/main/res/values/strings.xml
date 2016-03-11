@@ -41,4 +41,9 @@ La Dieta Mediterranea presenta le seguenti caratteristiche fondamentali:
 
     <!-- button string -->
     <string name="mangiato_button">Pasto inserito!</string>
+
+    <!-- tutorial string -->
+    <string name="tutorial_one">1) Trascina i cibi nell'apposito box</string>
+    <string name="tutorial_two">2a) Premi la spunta per salvare la selezione come pasto consumato...</string>
+    <string name="tutorial_three">2b) ...oppure premi il punto di domanda per sapere quali cibi è più conveniente mangiare!\nBuon appetito!</string>
 </resources>
