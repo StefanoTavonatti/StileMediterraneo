@@ -4,10 +4,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
 import android.net.Uri;
 import android.text.format.Time;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import ictsdays16.hackaton.stilemediterraneo.R;
 
@@ -151,6 +153,47 @@ public class DBManager extends SQLiteOpenHelper {
         //ctrl+q -> doc
         return db.query(true,"ciboicona",new String[]{"nome","uri","ID"},"",null,"","","","");
 
+    }
+
+    public Cursor countWeekMeal(){
+        // ritorna cibi base consumati dallo scorso lunedì: ID, porzioni, porzioni max
+        SQLiteDatabase db=getReadableDatabase();
+        return db.rawQuery("SELECT id, count(cibobase) AS porzioni, porzioni_max FROM cibobase JOIN pasti ON cibobase=cibobase.ID GROUP BY cibobase WHERE timestamp>+" + this.getMonday(), null);
+    }
+
+    //TODO: VERY VERY HARDCODED!
+    public ArrayList<Integer> semafori(){
+        ArrayList<Integer> result = new ArrayList<Integer>();
+        Cursor bases = this.countWeekMeal();
+        HashMap<Integer, Integer> mapBases = new HashMap<Integer, Integer>();
+        bases.moveToFirst();
+        do {
+            //map id with remaining meal
+            mapBases.put(bases.getInt(0), (bases.getInt(2)-bases.getInt(1)));
+        }  while(bases.moveToNext();
+        SQLiteDatabase db=getReadableDatabase();
+
+        int gap = 0;
+        int col = Color.WHITE;
+        for(int i=1; i<=15; i++) {
+            Cursor ingredients = this.getBasicIngredients(i);
+            ingredients.moveToFirst();
+            do {
+                gap+=mapBases.get(ingredients.getInt(0));
+                if(gap<-1) {
+                    col=Color.RED;
+                }
+                else if(gap<1) {
+                    col=Color.YELLOW;
+                }
+                else if(gap>5) {
+                    col = Color.GREEN;
+                }
+                gap=0;
+                result.add(col);
+            }  while(ingredients.moveToNext();
+        }
+        return result;
     }
 
     //da cibo icona a singoli cibi base
