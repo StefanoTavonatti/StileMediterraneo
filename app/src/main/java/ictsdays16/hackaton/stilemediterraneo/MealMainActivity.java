@@ -50,6 +50,7 @@ public class MealMainActivity extends AppCompatActivity
     private GridLayout menuReceiver;
     private GridLayout gridLayout;
     private SharedPreferences prefs;
+    private Boolean iconLoaded=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -291,6 +292,9 @@ public class MealMainActivity extends AppCompatActivity
             DBManager dbManager=new DBManager(this);
             dbManager.insertData();
         }
-        loadIcons(null);
+        if(!iconLoaded) {
+            loadIcons(null);
+            iconLoaded=true;
+        }
     }
 }
