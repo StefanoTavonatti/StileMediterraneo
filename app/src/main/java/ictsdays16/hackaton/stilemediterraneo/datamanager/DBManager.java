@@ -170,7 +170,7 @@ public class DBManager extends SQLiteOpenHelper {
         do {
             //map id with remaining meal
             mapBases.put(bases.getInt(0), (bases.getInt(2)-bases.getInt(1)));
-        }  while(bases.moveToNext();
+        }  while(bases.moveToNext());
         SQLiteDatabase db=getReadableDatabase();
 
         int gap = 0;
@@ -191,7 +191,7 @@ public class DBManager extends SQLiteOpenHelper {
                 }
                 gap=0;
                 result.add(col);
-            }  while(ingredients.moveToNext();
+            }  while(ingredients.moveToNext());
         }
         return result;
     }
