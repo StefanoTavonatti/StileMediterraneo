@@ -61,26 +61,54 @@ public class DBManager extends SQLiteOpenHelper {
 
     public void insertData(){
         SQLiteDatabase db=getWritableDatabase();
-        Uri path = Uri.parse("android.resource://ictsdays16.hackaton.stilemediterraneo/drawable/" + "cup");
-
-        String uriCup=path.toString();
+        String defaultPath = "android.resource://ictsdays16.hackaton.stilemediterraneo/drawable/";
 
         //ciboicona
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"frutta\",\""+uriCup+"\")");//1
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"verdura\",\""+uriCup+"\")");//2
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pesce\",\""+uriCup+"\")");//3
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pollame\",\""+uriCup+"\")");//4
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"carne rossa\",\""+uriCup+"\")");//5
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"patate\",\""+uriCup+"\")");//6
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"uova\",\""+uriCup+"\")");//7
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pane\",\""+uriCup+"\")");//8
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pizza\",\""+uriCup+"\")");//9
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pasta\",\""+uriCup+"\")");//10
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"prodotti da forno\",\""+uriCup+"\")");//11
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"latte\",\""+uriCup+"\")");//12
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"latticini\",\""+uriCup+"\")");//13
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"dolci\",\""+uriCup+"\")");//14
-        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"vino\",\""+uriCup+"\")");//15
+        Uri path = Uri.parse(defaultPath + "frutta");
+        String iconName=path.toString();
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"frutta\",\""+iconName+"\")");//1
+        path = Uri.parse(defaultPath + "verdura");
+        iconName=path.toString();
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"verdura\",\""+iconName+"\")");//2
+        path = Uri.parse(defaultPath + "pesce");
+        iconName=path.toString();
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pesce\",\""+iconName+"\")");//3
+        path = Uri.parse(defaultPath + "pollame");
+        iconName=path.toString();
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pollame\",\""+iconName+"\")");//4
+        path = Uri.parse(defaultPath + "carne_rossa");
+        iconName=path.toString();
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"carne rossa\",\""+iconName+"\")");//5
+        path = Uri.parse(defaultPath + "patate");
+        iconName=path.toString();
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"patate\",\""+iconName+"\")");//6
+        path = Uri.parse(defaultPath + "uova");
+        iconName=path.toString();
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"uova\",\""+iconName+"\")");//7
+        path = Uri.parse(defaultPath + "pane");
+        iconName=path.toString();
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pane\",\""+iconName+"\")");//8
+        path = Uri.parse(defaultPath + "pizza");
+        iconName=path.toString();
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pizza\",\""+iconName+"\")");//9
+        path = Uri.parse(defaultPath + "pasta");
+        iconName=path.toString();
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"pasta\",\""+iconName+"\")");//10
+        path = Uri.parse(defaultPath + "biscotti");
+        iconName=path.toString();
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"prodotti da forno\",\""+iconName+"\")");//11
+        path = Uri.parse(defaultPath + "latte");
+        iconName=path.toString();
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"latte\",\""+iconName+"\")");//12
+        path = Uri.parse(defaultPath + "formaggio");
+        iconName=path.toString();
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"latticini\",\""+iconName+"\")");//13
+        path = Uri.parse(defaultPath + "dolci");
+        iconName=path.toString();
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"dolci\",\""+iconName+"\")");//14
+        path = Uri.parse(defaultPath + "vino");
+        iconName=path.toString();
+        db.execSQL("INSERT INTO ciboicona(nome,URI) VALUES (\"vino\",\""+iconName+"\")");//15
 
         //cibobase
         db.execSQL("INSERT INTO cibobase(nome, porzioni_max, valore) VALUES (\"frutta\",35,1)");//1
