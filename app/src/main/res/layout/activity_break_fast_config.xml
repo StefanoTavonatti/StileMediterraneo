@@ -20,31 +20,56 @@
 
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:background="@drawable/border"
                         >
 
                         <RadioButton
+                            android:textSize="25dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Colazione tradizionale"/>
 
                         <TextView
+                            android:padding="5dp"
+                            android:textSize="20dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Prova"/>
+                            android:text="Sei relativamente abitudinario e la tua colazione è approssimativamente sempre simile e in accordo con la Dieta Mediterranea? Selezionando questa opzione, non dovrai indicare giorno per giorno la tua routine, sarà l\'applicazione ad aggiornare le tue statistiche per quanto riguarda la colazione! "/>
 
                         </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:background="@drawable/border"
+                        >
+
+                        <RadioButton
+                            android:textSize="25dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Colazione speciale"/>
+
+                        <TextView
+                            android:textSize="20dp"
+                            android:padding="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="La mattina sei di fretta e non sempre riesci a fare colazione? Preferisci affrontare la giornata con pane e affettato rispetto a latte e biscotti? Testa quanto le tue abitudini sono compatibili con la Dieta Mediterranea, potresti trovare risultati sorprendenti!"/>
+
+                    </LinearLayout>
 
 
                 </LinearLayout>
