@@ -187,6 +187,12 @@ public class DBManager extends SQLiteOpenHelper {
         return milliSec-(milliSec%weekMilliSec);
     }
 
+    public Cursor overall() {
+        SQLiteDatabase db=getWritableDatabase();
+        Cursor c = db.rawQuery("SELECT nome, count(cibobase) AS porzioni FROM cibobase JOIN pasti ON cibobase=ID GROUP BY cibobase ORDER BY porzioni DESC", null);
+        return c;
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 

@@ -23,7 +23,8 @@
         <activity android:name=".InternalInfoActivity" />
         <activity android:name=".ExternalLinkActivity" />
         <activity android:name=".WeekStatsActivity" />
-        <activity android:name=".MonthStatsActivity"></activity>
+        <activity android:name=".MonthStatsActivity" />
+        <activity android:name=".OverallStatisticsActivity"></activity>
     </application>
 
 </manifest>
