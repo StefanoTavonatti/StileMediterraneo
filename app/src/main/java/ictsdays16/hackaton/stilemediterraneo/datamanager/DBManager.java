@@ -149,7 +149,7 @@ public class DBManager extends SQLiteOpenHelper {
     public Cursor readData(){
         SQLiteDatabase db=getReadableDatabase();
         //ctrl+q -> doc
-        return db.query(true,"ciboicona",new String[]{"nome","uri"},"",null,"","","","");
+        return db.query(true,"ciboicona",new String[]{"nome","uri","ID"},"",null,"","","","");
 
     }
 

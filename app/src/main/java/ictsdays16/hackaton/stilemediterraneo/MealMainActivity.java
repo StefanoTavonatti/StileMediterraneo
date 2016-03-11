@@ -41,6 +41,7 @@ import java.io.InputStream;
 import java.net.URI;
 
 import ictsdays16.hackaton.stilemediterraneo.datamanager.DBManager;
+import ictsdays16.hackaton.stilemediterraneo.layouts.FoodLinearLayout;
 import ictsdays16.hackaton.stilemediterraneo.listeners.FoodOnTouchListener;
 
 public class MealMainActivity extends AppCompatActivity
@@ -110,7 +111,7 @@ public class MealMainActivity extends AppCompatActivity
                         break;
                     case DragEvent.ACTION_DROP:
                         // Dropped, reassign View to ViewGroup
-                        Log.d("DRAG", "Dropped here " + v.getId() + " " + v.getParent().getClass().toString());
+                        Log.d("DRAG", "Dropped here " + v.getId() + " " + v.getParent().getClass().toString()+" ID: "+((FoodLinearLayout)event.getLocalState()).getID());
                         View view = (View) event.getLocalState();
                         ViewGroup owner = (ViewGroup) view.getParent();
                         owner.removeView(view);
@@ -251,14 +252,18 @@ public class MealMainActivity extends AppCompatActivity
             //imageView.setImageBitmap(bitmap); //DECOMMENTA QUI NEL CASO IL CARICAMNTO DELLE IMMAGINI FOSSE TROPPO LENTO E COMMENTA LA RIGA SOPRA
 
 
-            LinearLayout linearLayout=new LinearLayout(this);
+            FoodLinearLayout linearLayout=new FoodLinearLayout(this);
             linearLayout.setOrientation(LinearLayout.VERTICAL);
             linearLayout.addView(imageView);
+
             TextView textView=new TextView(this);
             textView.setText(c.getString(0));
             linearLayout.addView(textView);
             textView.setGravity(TextView.TEXT_ALIGNMENT_CENTER);
             textView.setGravity(TextView.TEXT_ALIGNMENT_CENTER);
+
+            linearLayout.setID(c.getInt(2));
+
             linearLayout.setOnTouchListener(new FoodOnTouchListener());
             linearLayout.setGravity(LinearLayout.TEXT_ALIGNMENT_CENTER);
             linearLayout.setHorizontalGravity(LinearLayout.TEXT_ALIGNMENT_CENTER);
