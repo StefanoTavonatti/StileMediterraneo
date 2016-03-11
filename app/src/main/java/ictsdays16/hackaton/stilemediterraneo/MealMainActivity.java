@@ -42,6 +42,8 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import ictsdays16.hackaton.stilemediterraneo.appconf.BreakFastConfig;
+import ictsdays16.hackaton.stilemediterraneo.appconf.MealSchedule;
 import ictsdays16.hackaton.stilemediterraneo.datamanager.DBManager;
 import ictsdays16.hackaton.stilemediterraneo.layouts.FoodLinearLayout;
 import ictsdays16.hackaton.stilemediterraneo.listeners.FoodOnTouchListener;
@@ -356,6 +358,12 @@ public class MealMainActivity extends AppCompatActivity
             DBManager dbManager=new DBManager(this);
             dbManager.insertData();
 
+
+            Intent intent=new Intent(this, MealSchedule.class);
+            startActivity(intent);
+        }
+
+        if(getIntent().hasExtra(BreakFastConfig.CONFIGURATION_FINISHED)){
             LinearLayout tutorial= (LinearLayout) findViewById(R.id.tutorial1);
             tutorial.setVisibility(View.VISIBLE);
         }
@@ -363,6 +371,8 @@ public class MealMainActivity extends AppCompatActivity
             loadIcons(null);
             iconLoaded=true;
         }
+
+
     }
 
     public void onClickTutorial(View view){

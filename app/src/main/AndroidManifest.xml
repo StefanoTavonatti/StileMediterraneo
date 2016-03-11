@@ -25,7 +25,9 @@
         <activity android:name=".ExternalLinkActivity" />
         <activity android:name=".WeekStatsActivity" />
         <activity android:name=".MonthStatsActivity" />
-        <activity android:name=".OverallStatisticsActivity"></activity>
+        <activity android:name=".OverallStatisticsActivity" />
+        <activity android:name=".appconf.MealSchedule" />
+        <activity android:name=".appconf.BreakFastConfig"></activity>
     </application>
 
 </manifest>
