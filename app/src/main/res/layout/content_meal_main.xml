@@ -48,14 +48,19 @@
 
         </GridLayout>
 
-        <GridLayout
-            android:id="@+id/MealGridLayout"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:columnCount="4"
-            >
+            android:layout_height="wrap_content">
+            <GridLayout
+                android:id="@+id/MealGridLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="4"
+                >
+            </GridLayout>
+        </ScrollView>
 
-        </GridLayout>
+
     </LinearLayout>
 
     <LinearLayout
