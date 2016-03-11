@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
+import android.text.format.Time;
 
 import java.util.ArrayList;
 
@@ -150,6 +151,37 @@ public class DBManager extends SQLiteOpenHelper {
         //ctrl+q -> doc
         return db.query(true,"ciboicona",new String[]{"nome","uri"},"",null,"","","","");
 
+    }
+
+    //da cibo icona a singoli cibi base
+    private Cursor getBasicIngredients(int ID_icona) {
+        SQLiteDatabase db=getReadableDatabase();
+        return db.query(true, "cibovalore", new String[]{"ID_base"}, "ID_icona="+Integer.toString(ID_icona), null, "","","","");
+    }
+
+    public boolean insertSingleMeal(int ID_icona) {
+        Cursor basicIDs = getBasicIngredients(ID_icona);
+        SQLiteDatabase db=getWritableDatabase();
+        String theQuery ="";
+        for(int i=0; i<basicIDs.getCount(); i++) {
+            String time = Long.toString(System.currentTimeMillis());
+            basicIDs.move(i);
+            int idBase = basicIDs.getInt(0);
+            theQuery = "INSERT INTO pasti(cibobase, timestamp) VALUES (\""+Integer.toString(idBase)+"\",\""+time+"\")";
+        }
+        db.execSQL(theQuery);
+        //false for errors TODO
+        return true;
+    }
+
+    private long getMonday() {
+        SQLiteDatabase db=getWritableDatabase();
+        Cursor c = db.query(true, "pasti", new String[]{"timestamp"}, "", null, "", "", "timestamp DESC", "");
+        c.moveToNext();
+        long milliSec = c.getLong(0);
+        //sec*min*hour*days
+        long weekMilliSec = 60*60*24*7;
+        return milliSec-(milliSec%weekMilliSec);
     }
 
     @Override
