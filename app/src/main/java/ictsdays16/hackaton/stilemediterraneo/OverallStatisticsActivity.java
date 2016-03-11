@@ -17,17 +17,17 @@ public class OverallStatisticsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_overall_statistics);
         DBManager db = new DBManager(this);
         Cursor list = db.overall();
-        list.moveToFirst();
+
         LinearLayout box = (LinearLayout) findViewById(R.id.overallBox);
-        for(int i=0; i<list.getCount()-1; i++) {
-            list.move(i);
-            String food = list.getString(0);
-            int count = list.getInt(1);
-            TextView text = new TextView(this);
-            text.setText(food+": "+count+ " porzioni.");
-            text.setTextSize(20f);
-            box.addView(text);
-        }
+        if(list.moveToFirst())
+            do{
+                String food =list.getString(list.getColumnIndex("nome"));
+                int count = list.getInt(list.getColumnIndex("porzioni"));
+                TextView text = new TextView(this);
+                text.setText(food+": "+count+ " porzioni.");
+                text.setTextSize(20f);
+                box.addView(text);
+            }while(list.moveToNext());
     }
 
     public void returnHome(View v) {
