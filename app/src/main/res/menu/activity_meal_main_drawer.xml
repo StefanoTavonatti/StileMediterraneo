@@ -26,11 +26,11 @@
         <menu>
             <item
                 android:id="@+id/info_inside"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_silverware_variant_grey600_24dp"
                 android:title="@string/info_inside" />
             <item
                 android:id="@+id/info_link"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_silverware_variant_grey600_24dp"
                 android:title="@string/info_link" />
         </menu>
     </item>
@@ -39,16 +39,16 @@
         <menu>
             <item
                 android:id="@+id/last_week"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/ic_silverware_variant_grey600_24dp"
                 android:title="@string/last_week" />
             <item
                 android:id="@+id/last_month"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_silverware_variant_grey600_24dp"
                 android:title="@string/last_month" />
 
             <item
                 android:id="@+id/nav_total"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/ic_silverware_variant_grey600_24dp"
                 android:title="@string/total"
                 />
         </menu>
@@ -58,11 +58,11 @@
         <menu>
             <item
                 android:id="@+id/icons_credits"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_silverware_variant_grey600_24dp"
                 android:title="@string/icons_credits" />
             <item
                 android:id="@+id/developers_credits"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_silverware_variant_grey600_24dp"
                 android:title="@string/developers_credits" />
         </menu>
     </item>
