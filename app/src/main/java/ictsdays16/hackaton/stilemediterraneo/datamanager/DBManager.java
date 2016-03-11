@@ -156,12 +156,15 @@ public class DBManager extends SQLiteOpenHelper {
     //da cibo icona a singoli cibi base
     private Cursor getBasicIngredients(int ID_icona) {
         SQLiteDatabase db=getReadableDatabase();
-        return db.query(true, "cibovalore", new String[]{"ID_base"}, "ID_icona="+Integer.toString(ID_icona), null, "","","","");
+        //Cursor c = db.query(true, "cibovalore", new String[]{"ID_base"}, "ID_icona="+Integer.toString(ID_icona), null, "","","","");
+        Cursor c = db.rawQuery("SELECT ID_base FROM cibovalore Where ID_icona="+Integer.toString(ID_icona), null);
+        return c;
     }
 
     public boolean insertSingleMeal(int ID_icona) {
         Cursor basicIDs = getBasicIngredients(ID_icona);
         SQLiteDatabase db=getWritableDatabase();
+        basicIDs.moveToFirst();
         String theQuery ="";
         for(int i=0; i<basicIDs.getCount(); i++) {
             String time = Long.toString(System.currentTimeMillis());

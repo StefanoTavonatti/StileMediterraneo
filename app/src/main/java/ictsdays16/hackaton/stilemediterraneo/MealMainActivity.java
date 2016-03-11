@@ -71,6 +71,23 @@ public class MealMainActivity extends AppCompatActivity
             }
         });
 
+        FloatingActionButton fabMeal = (FloatingActionButton) findViewById(R.id.mangiato);
+        fabMeal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                for(int i=0; i<menuReceiver.getChildCount(); i++) {
+                    View v = menuReceiver.getChildAt(i);
+                    if(v instanceof FoodLinearLayout) {
+                        int id = ((FoodLinearLayout) v).getID();
+                        DBManager db = new DBManager(getApplicationContext());
+                        db.insertSingleMeal(id);
+                    }
+                }
+                Snackbar.make(view, getResources().getString(R.string.mangiato_button), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

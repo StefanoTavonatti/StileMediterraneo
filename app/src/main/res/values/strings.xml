@@ -38,4 +38,7 @@ Inoltre, le caratteristiche della dieta comprendono un consumo moderato di pesce
 Per garantire l\'apporto di grassi, tra i popoli del Mediterraneo è diffuso il consumo di olio d\'oliva, che contiene grassi di qualità superiore, meno nocivi di quelli animali, e anzi salutari per l\'organismo.
 La Dieta Mediterranea presenta le seguenti caratteristiche fondamentali:
 \n1) Basso contenuti di acidi grassi saturi \n2) Ricchezza di carboidrati e fibra \n3) Alto contenuto di acidi grassi monoinsaturi (derivati principalmente dall\'olio d\'oliva). \nLiberamente adattato da: www.fondazionedietamediterranea.it</string>
+
+    <!-- button string -->
+    <string name="mangiato_button">Pasto inserito!</string>
 </resources>
