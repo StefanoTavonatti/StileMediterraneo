@@ -189,7 +189,7 @@ public class DBManager extends SQLiteOpenHelper {
 
     public Cursor overall() {
         SQLiteDatabase db=getWritableDatabase();
-        Cursor c = db.rawQuery("SELECT nome, count(cibobase) AS porzioni FROM cibobase JOIN pasti ON cibobase=ID GROUP BY cibobase ORDER BY porzioni DESC", null);
+        Cursor c = db.rawQuery("SELECT nome, count(cibobase) AS porzioni FROM cibobase JOIN pasti ON cibobase=cibobase.ID GROUP BY cibobase ORDER BY porzioni DESC", null);
         return c;
     }
 

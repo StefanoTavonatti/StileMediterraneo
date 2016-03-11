@@ -216,6 +216,10 @@ public class MealMainActivity extends AppCompatActivity
             Intent newIntent = new Intent(this,ExternalLinkActivity.class);
             startActivity(newIntent);
         }
+        else if (id == R.id.nav_total) {
+            Intent newIntent = new Intent(this,OverallStatisticsActivity.class);
+            startActivity(newIntent);
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
