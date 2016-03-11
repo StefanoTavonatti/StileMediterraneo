@@ -30,4 +30,12 @@
     <string name="dev_presentation">Ciao! Siamo un gruppo di sviluppatori che si sono divertiti a fare questa applicazione per un Hackthon organizzato durante gli ITCdays2016 a Povo(TN). Puoi contattarci tramite mail:</string>
     <string name="dev_github">Puoi trovare il codice di questa applicazione su GitHub:</string>
 
+    <!-- info string -->
+    <string name="dev_diet_info">La dieta mediterranea è uno stile di vita, non è una restrizione alimentare adottata per perdere peso. In questo regime alimentare viene data alla parola \'dieta\' il significato che aveva la parola da cui deriva: \'diaita\' in greco significa \'modo di vivere\'. Quest\'app ti aiuta a seguire questo stile alimentare il più fedelmente possibile, senza darti alcun tipo di restrizione, nel modo più semplice possibile."</string>
+    <string name="diet_fundation">La Dieta Mediterranea è l\'insieme delle abitudini alimentari dei popoli del bacino del Mediterraneo, che si sono consolidate nei secoli e sono rimaste pressoché immutate fino al boom economico degli anni \'50.
+Questo insieme di abitudini consiste principalmente nel consumo abbondante di: \n1) Pane \n2) Pasta \n3) Verdure \n4) Insalate \n5) Legumi \n6) Frutta \n7) Frutta secca.\n
+Inoltre, le caratteristiche della dieta comprendono un consumo moderato di pesce, carne bianca, latticini e uova. Il consumo di carne rossa e vino è limitato rispetto alle diete di altre zone del mondo.
+Per garantire l\'apporto di grassi, tra i popoli del Mediterraneo è diffuso il consumo di olio d\'oliva, che contiene grassi di qualità superiore, meno nocivi di quelli animali, e anzi salutari per l\'organismo.
+La Dieta Mediterranea presenta le seguenti caratteristiche fondamentali:
+\n1) Basso contenuti di acidi grassi saturi \n2) Ricchezza di carboidrati e fibra \n3) Alto contenuto di acidi grassi monoinsaturi (derivati principalmente dall\'olio d\'oliva). \nLiberamente adattato da: www.fondazionedietamediterranea.it</string>
 </resources>

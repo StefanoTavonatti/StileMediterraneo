@@ -11,13 +11,6 @@
     android:gravity="center"
     tools:context="ictsdays16.hackaton.stilemediterraneo.ExternalLinkActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:text="TODO!!!!!!!!!!!!" />
-
     <Button
         android:text="@string/return_button"
         android:textColor="#FFFFFF"
@@ -30,7 +23,27 @@
         android:shadowDx="0"
         android:shadowDy="0"
         android:shadowRadius="5"
-        android:layout_margin="20dp"
+        android:layout_margin="5dp"
         android:onClick="returnHome"/>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:autoLink="web"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:text="@string/diet_fundation" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
 
 </LinearLayout>
