@@ -91,6 +91,9 @@ public class MealMainActivity extends AppCompatActivity
                 }
                 Snackbar.make(view, getResources().getString(R.string.mangiato_button), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                menuReceiver.removeAllViews();
+                gridLayout.removeAllViews();
+                loadIcons(null);
             }
         });
 
@@ -268,7 +271,11 @@ public class MealMainActivity extends AppCompatActivity
 
         Cursor c=dbManager.readData();
         c.moveToFirst();
-        ;
+
+        ArrayList<Integer> semafori=dbManager.semafori();
+
+        //Log.d("SEMAFORI",""+semafori.get(0)+" "+semafori.get(1));
+
         LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 
         ArrayList<Integer> arrayList=null;
@@ -300,7 +307,16 @@ public class MealMainActivity extends AppCompatActivity
             textView.setGravity(TextView.TEXT_ALIGNMENT_CENTER);
             textView.setGravity(TextView.TEXT_ALIGNMENT_CENTER);
 
-            linearLayout.setID(c.getInt(2));
+            int ID=c.getInt(2);
+
+            if(semafori.size()>ID-1) {
+                int temp=semafori.get(ID-1).intValue();
+                Color col;
+
+                textView.setTextColor(temp);
+            }
+
+            linearLayout.setID(ID);
 
             linearLayout.setOnTouchListener(new FoodOnTouchListener());
             linearLayout.setGravity(LinearLayout.TEXT_ALIGNMENT_CENTER);

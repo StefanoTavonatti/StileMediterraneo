@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.net.Uri;
 import android.text.format.Time;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -151,14 +152,14 @@ public class DBManager extends SQLiteOpenHelper {
     public Cursor readData(){
         SQLiteDatabase db=getReadableDatabase();
         //ctrl+q -> doc
-        return db.query(true,"ciboicona",new String[]{"nome","uri","ID"},"",null,"","","","");
+        return db.query(true, "ciboicona", new String[]{"nome", "uri", "ID"}, "", null, "", "", "", "");
 
     }
 
     public Cursor countWeekMeal(){
         // ritorna cibi base consumati dallo scorso lunedì: ID, porzioni, porzioni max
         SQLiteDatabase db=getReadableDatabase();
-        return db.rawQuery("SELECT id, count(cibobase) AS porzioni, porzioni_max FROM cibobase JOIN pasti ON cibobase=cibobase.ID GROUP BY cibobase WHERE timestamp>+" + this.getMonday(), null);
+        return db.rawQuery("SELECT cibobase.id, count(cibobase) AS porzioni, porzioni_max FROM cibobase JOIN pasti ON cibobase=cibobase.ID  WHERE timestamp>+" + this.getMonday()+" GROUP BY cibobase", null);
     }
 
     //TODO: VERY VERY HARDCODED!
@@ -166,39 +167,51 @@ public class DBManager extends SQLiteOpenHelper {
         ArrayList<Integer> result = new ArrayList<Integer>();
         Cursor bases = this.countWeekMeal();
         HashMap<Integer, Integer> mapBases = new HashMap<Integer, Integer>();
-        bases.moveToFirst();
-        do {
-            //map id with remaining meal
-            mapBases.put(bases.getInt(0), (bases.getInt(2)-bases.getInt(1)));
-        }  while(bases.moveToNext());
-        SQLiteDatabase db=getReadableDatabase();
+
+        if(bases.moveToFirst()) {
+            do {
+                //map id with remaining meal
+                mapBases.put(bases.getInt(0), (bases.getInt(2) - bases.getInt(1)));
+            } while (bases.moveToNext());
+            SQLiteDatabase db = getReadableDatabase();
+        }
+        else {
+            Log.d("DB", "Basis null");
+            return result;
+        }
 
         int gap = 0;
-        int col = Color.WHITE;
+        int col = Color.BLACK;
         for(int i=1; i<=15; i++) {
             Cursor ingredients = this.getBasicIngredients(i);
-            ingredients.moveToFirst();
-            do {
-                gap+=mapBases.get(ingredients.getInt(0));
-                if(gap<-1) {
-                    col=Color.RED;
-                }
-                else if(gap<1) {
-                    col=Color.YELLOW;
-                }
-                else if(gap>5) {
-                    col = Color.GREEN;
-                }
-                gap=0;
-                result.add(col);
-            }  while(ingredients.moveToNext());
+            if(ingredients.moveToFirst()) {
+                do {
+                    int temp = ingredients.getInt(0);
+                    Integer temp2 = mapBases.get(temp);
+
+                    if (temp2 == null) {
+                        break;
+                    }
+                    gap += temp2.intValue();
+                    if (gap < -1) {
+                        col = Color.RED;
+                    } else if (gap < 1) {
+                        col = Color.YELLOW;
+                    } else if (gap > 5) {
+                        col = Color.GREEN;
+                    }
+                    gap = 0;
+                    result.add(col);
+                    col = Color.BLACK;
+                } while (ingredients.moveToNext());
+            }
         }
         return result;
     }
 
     //da cibo icona a singoli cibi base
     private Cursor getBasicIngredients(int ID_icona) {
-        SQLiteDatabase db=getReadableDatabase();
+        SQLiteDatabase db =getReadableDatabase();
         //Cursor c = db.query(true, "cibovalore", new String[]{"ID_base"}, "ID_icona="+Integer.toString(ID_icona), null, "","","","");
         Cursor c = db.rawQuery("SELECT ID_base FROM cibovalore Where ID_icona="+Integer.toString(ID_icona), null);
         return c;
@@ -206,7 +219,7 @@ public class DBManager extends SQLiteOpenHelper {
 
     public boolean insertSingleMeal(int ID_icona) {
         Cursor basicIDs = getBasicIngredients(ID_icona);
-        SQLiteDatabase db=getWritableDatabase();
+        SQLiteDatabase db =getWritableDatabase();
         basicIDs.moveToFirst();
         String theQuery ="";
         for(int i=0; i<basicIDs.getCount(); i++) {
@@ -223,11 +236,16 @@ public class DBManager extends SQLiteOpenHelper {
     private long getMonday() {
         SQLiteDatabase db=getWritableDatabase();
         Cursor c = db.query(true, "pasti", new String[]{"timestamp"}, "", null, "", "", "timestamp DESC", "");
-        c.moveToNext();
-        long milliSec = c.getLong(0);
-        //sec*min*hour*days
-        long weekMilliSec = 60*60*24*7;
-        return milliSec-(milliSec%weekMilliSec);
+        if(c.moveToFirst()){
+            long milliSec = c.getLong(0);
+            //sec*min*hour*days
+            long weekMilliSec = 60*60*24*7;
+            return milliSec-(milliSec%weekMilliSec);
+        }
+        else
+        {
+            return -1;
+        }
     }
 
     public Cursor overall() {
