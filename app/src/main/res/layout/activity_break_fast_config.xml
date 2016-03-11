@@ -20,7 +20,8 @@
 
             <RadioGroup
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -35,10 +36,12 @@
                         >
 
                         <RadioButton
+                            android:id="@+id/colazione_tradizionale"
                             android:textSize="25dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Colazione tradizionale"/>
+                            android:text="Colazione tradizionale"
+                            android:onClick="onClickTradizionale"/>
 
                         <TextView
                             android:padding="5dp"
@@ -57,10 +60,12 @@
                         >
 
                         <RadioButton
+                            android:id="@+id/colazione_speciale"
                             android:textSize="25dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Colazione speciale"/>
+                            android:text="Colazione speciale"
+                            android:onClick="onClickSpeciale"/>
 
                         <TextView
                             android:textSize="20dp"

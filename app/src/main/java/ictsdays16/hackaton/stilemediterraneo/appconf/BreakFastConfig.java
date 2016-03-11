@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RadioButton;
 
 import ictsdays16.hackaton.stilemediterraneo.MealMainActivity;
 import ictsdays16.hackaton.stilemediterraneo.R;
@@ -45,5 +47,15 @@ public class BreakFastConfig extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         // do nothing.
+    }
+
+    public void onClickTradizionale(View view){
+        RadioButton radioButton= (RadioButton) findViewById(R.id.colazione_speciale);
+        radioButton.setChecked(false);
+    }
+
+    public void onClickSpeciale(View view){
+        RadioButton radioButton= (RadioButton) findViewById(R.id.colazione_tradizionale);
+        radioButton.setChecked(false);
     }
 }
