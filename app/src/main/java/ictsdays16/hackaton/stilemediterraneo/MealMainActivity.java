@@ -314,10 +314,17 @@ public class MealMainActivity extends AppCompatActivity
 
             DBManager dbManager=new DBManager(this);
             dbManager.insertData();
+
+            LinearLayout tutorial= (LinearLayout) findViewById(R.id.tutorial1);
+            tutorial.setVisibility(View.VISIBLE);
         }
         if(!iconLoaded) {
             loadIcons(null);
             iconLoaded=true;
         }
+    }
+
+    public void onClickTutorial(View view){
+        view.setVisibility(View.GONE);
     }
 }
