@@ -2,6 +2,7 @@ package ictsdays16.hackaton.stilemediterraneo;
 
 import android.content.ClipData;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -48,6 +49,7 @@ public class MealMainActivity extends AppCompatActivity
     private Button dragBtn;
     private GridLayout menuReceiver;
     private GridLayout gridLayout;
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,8 @@ public class MealMainActivity extends AppCompatActivity
         setContentView(R.layout.activity_meal_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        prefs = getSharedPreferences("ictdays2016.hackathon.stileMediterraneo", MODE_PRIVATE);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.mangiare);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -124,10 +128,6 @@ public class MealMainActivity extends AppCompatActivity
 
         findViewById(R.id.MealMainLayout).setOnDragListener(this);
 
-        DBManager dbManager=new DBManager(this);
-        dbManager.insertData();
-
-        loadIcons(savedInstanceState);
     }
 
     @Override
@@ -279,6 +279,18 @@ public class MealMainActivity extends AppCompatActivity
             }*/
         }
 
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (prefs.getBoolean("firstrun", true)) {
+
+            prefs.edit().putBoolean("firstrun", false).commit();
+
+            DBManager dbManager=new DBManager(this);
+            dbManager.insertData();
+        }
+        loadIcons(null);
     }
 }
